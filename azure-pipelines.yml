@@ -9,7 +9,7 @@ trigger:
   - master
 
 variables:
-  system_accesstoken: $(System.AccessToken)
+  system_accesstoken: AAAAC3NzaC1lZDI1NTE5AAAAID57h/8xuTt8FKK5tcGkdP1bkljmv3K6OsxcqbT6qv7Z
 
 steps:
 - checkout: self
