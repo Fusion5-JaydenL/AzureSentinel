@@ -3,22 +3,26 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-name: "Azure Sentinel Validations"
+name: "Azure Sentinel Updates"
 
 trigger:
   - master
 
-jobs:
-- template: .azure-pipelines/detectionsValidations.yaml
-- template: .azure-pipelines/detectionTemplateSchemaValidation.yaml
-- template: .azure-pipelines/kqlValidations.yaml
-- template: .azure-pipelines/NonAsciiValidations.yaml
-- template: .azure-pipelines/workbooksValidations.yaml
-- template: .azure-pipelines/workbooksTemplateValidations.yaml
-- template: .azure-pipelines/yamlFileValidator.yaml
-- template: .azure-pipelines/jsonFileValidator.yaml
-- template: .azure-pipelines/documentsLinkValidator.yaml
-- template: .azure-pipelines/logoValidator.yaml
-- template: .azure-pipelines/dataConnectorValidations.yaml
-- template: .azure-pipelines/playbooksValidations.yaml
-- template: .azure-pipelines/sampleDataValidator.yaml
+variables:
+  system_accesstoken: $(System.AccessToken)
+
+steps:
+- checkout: self
+  persistCredentials: true    # Allow scripts to access the system token
+  clean: true
+
+- task:  Bash@3
+  name:   GitRepoUpdate
+  inputs:
+    targetType: 'inline'
+    script: |
+      git config --global user.email "jayden.liddelow@fusion5.com.au"
+      git config --global user.name "jayden"
+      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+      git remote add vsts https:/https://github.com/Fusion5-JaydenL/AzureSentinel/
+      git branch -r | grep -v '\->' | while read remote; do git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" push -u vsts "${remote#origin/}"; done
