@@ -21,8 +21,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      git config --global user.email "xxxx@xxx.com"
+      git config --global user.email "jayden.liddelow@fusion5.com.au"
       git config --global user.name "jayden"
       git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-      git remote add vsts https://xxx.visualstudio.com/xxx/_git/xxxx
+      git remote add vsts https:/https://github.com/Fusion5-JaydenL/AzureSentinel/
       git branch -r | grep -v '\->' | while read remote; do git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" push -u vsts "${remote#origin/}"; done
