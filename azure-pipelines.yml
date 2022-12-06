@@ -9,7 +9,7 @@ trigger:
   - master
 
 variables:
-  system_accesstoken: AAAAC3NzaC1lZDI1NTE5AAAAID57h/8xuTt8FKK5tcGkdP1bkljmv3K6OsxcqbT6qv7Z
+  system_accesstoken: $(Git_Access)
 
 steps:
 - checkout: self
