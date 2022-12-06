@@ -6,10 +6,15 @@
 name: "Azure Sentinel Updates"
 
 trigger:
-  - master
-
+  branches:
+    include:
+    - '*'
+    
 variables:
   system_accesstoken: $(System.Git_Access)
+
+pool:
+  vmImage: 'ubuntu-latest'
 
 steps:
 - checkout: self
