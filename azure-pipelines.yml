@@ -9,7 +9,7 @@ trigger:
   - master
 
 variables:
-  system_accesstoken: $(Git_Access)
+  system_accesstoken: $(System.Git_Access)
 
 steps:
 - checkout: self
