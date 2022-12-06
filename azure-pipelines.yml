@@ -11,7 +11,7 @@ trigger:
     - '*'
     
 variables:
-  system_accesstoken: $(System.Git_Access)
+  system_accesstoken: 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
 
 pool:
   vmImage: 'ubuntu-latest'
